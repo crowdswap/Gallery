@@ -65,6 +65,8 @@ class CameraController: UIViewController {
     cameraView.stackView.addTarget(self, action: #selector(stackViewTouched(_:)), for: .touchUpInside)
     cameraView.shutterButton.addTarget(self, action: #selector(shutterButtonTouched(_:)), for: .touchUpInside)
     cameraView.doneButton.addTarget(self, action: #selector(doneButtonTouched(_:)), for: .touchUpInside)
+    cameraView.doneButton.isEnabled = false
+
   }
 
   func setupLocation() {
@@ -143,6 +145,8 @@ class CameraController: UIViewController {
 
   func refreshView() {
     let hasImages = !cart.images.isEmpty
+    cameraView.doneButton.isEnabled = hasImages
+    cameraView.doneButton.g_fade(visible:hasImages)
     cameraView.bottomView.g_fade(visible: hasImages)
   }
 
